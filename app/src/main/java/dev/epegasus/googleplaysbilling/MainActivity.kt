@@ -2,10 +2,12 @@ package dev.epegasus.googleplaysbilling
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.epegasus.googleplaysbilling.databinding.ActivityMainBinding
+import dev.epegasus.googleplaysbilling.manager.BillingManager
+import dev.epegasus.googleplaysbilling.status.State
 
-private const val TAG = "MyTag"
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -15,12 +17,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        billingManager.startConnection()
+        initBilling()
+        initObserver()
 
-        binding.tvTitle.setOnClickListener {
-            Log.d(TAG, "onCreate: ${billingManager.productDetailsList[0]} ")
-            billingManager.makePurchase(billingManager.productDetailsList[0])
+        binding.mbMakePurchase.setOnClickListener { onPurchaseClick() }
+    }
+
+    private fun initObserver() {
+        State.billingState.observe(this) {
+            Log.d("BillingManager", "initObserver: $it")
+            binding.tvTitle.text = it.toString()
         }
+    }
 
+    private fun initBilling() {
+        if (BuildConfig.DEBUG) {
+            billingManager.startConnection(billingManager.getDebugProductIDList()) { connectionResult, message ->
+                binding.mbMakePurchase.isEnabled = connectionResult
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            }
+        } else {
+            billingManager.startConnection(listOf(packageName)) { connectionResult, message ->
+                binding.mbMakePurchase.isEnabled = connectionResult
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun onPurchaseClick() {
+        billingManager.makePurchase { isSuccess, message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            binding.mbMakePurchase.isEnabled = !isSuccess
+        }
     }
 }

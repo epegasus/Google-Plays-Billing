@@ -47,4 +47,6 @@ dependencies {
 
     // Google Play Billing
     implementation "com.android.billingclient:billing-ktx:5.1.0"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha03"
 }

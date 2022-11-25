@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Google Play\'s Billing</string>
+    <string name="establishing_connection">Establishing Connection...</string>
+    <string name="purchase">Purchase</string>
 </resources>
