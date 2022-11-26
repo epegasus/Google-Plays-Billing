@@ -13,11 +13,14 @@
            ->  Upload your App
  
            ->  Create and configure your products (On Console)
-               ~   For each product, you need to provide a unique product ID, a title, a description, and pricing information.
-              ~   Subscriptions have additional required information, such as selecting whether it's an auto-renewing or prepaid renewal type for the base plan.
+               ~   For each product, you need to provide a unique product ID, a title,
+                   a description, and pricing information.
+               ~   Subscriptions have additional required information, such as selecting 
+                   whether it's an auto-renewing or prepaid renewal type for the base plan.
  
            1)  Initialize Billing Client
-               ~   It is the main interface for communication between the Google Play Billing Library and the rest of your app.
+               ~   It is the main interface for communication between the Google Play 
+                   Billing Library and the rest of your app.
            2)  Start Connection
                ~   Connection Setup Disconnected
                ~   Connection Setup Finished
