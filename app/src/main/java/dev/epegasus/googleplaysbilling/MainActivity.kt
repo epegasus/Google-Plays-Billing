@@ -5,7 +5,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.epegasus.billinginapppurchases.BillingManager
-import dev.epegasus.billinginapppurchases.helper.BillingHelper.Companion.TAG
 import dev.epegasus.googleplaysbilling.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -33,11 +32,8 @@ class MainActivity : AppCompatActivity() {
     private fun initBilling() {
         if (BuildConfig.DEBUG) {
             billingManager.startConnection(billingManager.getDebugProductIDList()) { connectionResult, message ->
-                Log.d(TAG, "initBilling: $connectionResult")
-                runOnUiThread {
-                    binding.mbMakePurchase.isEnabled = true
-                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-                }
+                binding.mbMakePurchase.isEnabled = connectionResult
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
             }
         } else {
             billingManager.startConnection(listOf(packageName)) { connectionResult, message ->
