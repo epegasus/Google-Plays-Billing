@@ -1,4 +1,4 @@
-package dev.epegasus.googleplaysbilling.enums
+package dev.epegasus.billinginapppurchases.enums
 
 enum class BillingState(message: String) {
     NONE("Not Stated"),
@@ -18,7 +18,7 @@ enum class BillingState(message: String) {
     LAUNCHING_FLOW_INVOCATION_USER_CANCELLED("Cancelled by user"),
     LAUNCHING_FLOW_INVOCATION_EXCEPTION_FOUND("Exception Found, launching Google billing sheet"),
     PURCHASED_SUCCESSFULLY("Successfully Purchased"),
-    PURCHASING_ALREADY_OWNED("Already owned this product"),
+    PURCHASING_ALREADY_OWNED("Already owned this product! No need to purchase"),
     PURCHASING_USER_CANCELLED("Purchasing product has been cancelled by user"),
     PURCHASING_FAILURE("Failed to make transaction"),
     PURCHASING_ERROR("Error found while purchasing")

@@ -1,6 +1,8 @@
-package dev.epegasus.googleplaysbilling.helper
+package dev.epegasus.billinginapppurchases.helper
 
 import android.app.Activity
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener
@@ -12,10 +14,10 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.queryProductDetails
-import dev.epegasus.googleplaysbilling.dataProvider.DataProvider
-import dev.epegasus.googleplaysbilling.enums.BillingState
-import dev.epegasus.googleplaysbilling.status.State.getBillingState
-import dev.epegasus.googleplaysbilling.status.State.setBillingState
+import dev.epegasus.billinginapppurchases.dataProvider.DataProvider
+import dev.epegasus.billinginapppurchases.enums.BillingState
+import dev.epegasus.billinginapppurchases.status.State.getBillingState
+import dev.epegasus.billinginapppurchases.status.State.setBillingState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,7 +61,7 @@ abstract class BillingHelper(private val activity: Activity) {
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingServiceDisconnected() {
                 setBillingState(BillingState.CONNECTION_DISCONNECTED)
-                callback.invoke(false, BillingState.CONNECTION_DISCONNECTED.toString())
+                Handler(Looper.getMainLooper()).post { callback.invoke(false, BillingState.CONNECTION_DISCONNECTED.toString()) }
             }
 
             override fun onBillingSetupFinished(billingResult: BillingResult) {
@@ -70,7 +72,7 @@ abstract class BillingHelper(private val activity: Activity) {
                 } else {
                     setBillingState(BillingState.CONNECTION_FAILED)
                 }
-                callback.invoke(isBillingReady, billingResult.debugMessage)
+                Handler(Looper.getMainLooper()).post { callback.invoke(isBillingReady, billingResult.debugMessage) }
             }
         })
     }

@@ -1,8 +1,8 @@
-package dev.epegasus.googleplaysbilling.status
+package dev.epegasus.billinginapppurchases.status
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dev.epegasus.googleplaysbilling.enums.BillingState
+import dev.epegasus.billinginapppurchases.enums.BillingState
 
 object State {
 

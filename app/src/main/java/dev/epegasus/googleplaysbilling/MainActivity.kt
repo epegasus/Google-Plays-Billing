@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import dev.epegasus.billinginapppurchases.BillingManager
+import dev.epegasus.billinginapppurchases.helper.BillingHelper.Companion.TAG
 import dev.epegasus.googleplaysbilling.databinding.ActivityMainBinding
-import dev.epegasus.googleplaysbilling.manager.BillingManager
-import dev.epegasus.googleplaysbilling.status.State
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        State.billingState.observe(this) {
+        dev.epegasus.billinginapppurchases.status.State.billingState.observe(this) {
             Log.d("BillingManager", "initObserver: $it")
             binding.tvTitle.text = it.toString()
         }
@@ -33,8 +33,11 @@ class MainActivity : AppCompatActivity() {
     private fun initBilling() {
         if (BuildConfig.DEBUG) {
             billingManager.startConnection(billingManager.getDebugProductIDList()) { connectionResult, message ->
-                binding.mbMakePurchase.isEnabled = connectionResult
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                Log.d(TAG, "initBilling: $connectionResult")
+                runOnUiThread {
+                    binding.mbMakePurchase.isEnabled = true
+                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                }
             }
         } else {
             billingManager.startConnection(listOf(packageName)) { connectionResult, message ->

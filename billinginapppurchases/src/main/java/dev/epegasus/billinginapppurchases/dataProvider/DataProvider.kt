@@ -1,4 +1,4 @@
-package dev.epegasus.googleplaysbilling.dataProvider
+package dev.epegasus.billinginapppurchases.dataProvider
 
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.ProductDetails

@@ -1,17 +1,7 @@
-package dev.epegasus.googleplaysbilling.manager
+package dev.epegasus.billinginapppurchases
 
 import android.app.Activity
-import android.util.Log
-import android.widget.Toast
-import com.android.billingclient.api.AcknowledgePurchaseParams
-import com.android.billingclient.api.AcknowledgePurchaseResponseListener
-import com.android.billingclient.api.BillingClient.BillingResponseCode
-import com.android.billingclient.api.Purchase
-import dev.epegasus.googleplaysbilling.helper.BillingHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import dev.epegasus.billinginapppurchases.helper.BillingHelper
 
 /**
  * @param activity: Must be a reference of an Activity
