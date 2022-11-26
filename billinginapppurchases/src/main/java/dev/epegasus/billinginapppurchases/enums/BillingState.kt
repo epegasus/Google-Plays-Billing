@@ -1,6 +1,6 @@
 package dev.epegasus.billinginapppurchases.enums
 
-enum class BillingState(message: String) {
+enum class BillingState(val message: String) {
     NONE("Not Stated"),
     EMPTY_PRODUCT_ID_LIST("Product Ids list cannot be empty"),
     CONNECTION_ESTABLISHING("Connecting to Google Play Console"),
