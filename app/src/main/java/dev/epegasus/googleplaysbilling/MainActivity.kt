@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.epegasus.billinginapppurchases.BillingManager
+import dev.epegasus.billinginapppurchases.status.State
 import dev.epegasus.googleplaysbilling.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        dev.epegasus.billinginapppurchases.status.State.billingState.observe(this) {
+        State.billingState.observe(this) {
             Log.d("BillingManager", "initObserver: $it")
             binding.tvTitle.text = it.toString()
         }

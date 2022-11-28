@@ -55,7 +55,7 @@ abstract class BillingHelper(private val activity: Activity) {
             callback.invoke(false, BillingState.EMPTY_PRODUCT_ID_LIST.message)
             return
         }
-        dpProvider.setProductList(productIdsList)
+        dpProvider.setProductIdsList(productIdsList)
 
         setBillingState(BillingState.CONNECTION_ESTABLISHING)
         billingClient.startConnection(object : BillingClientStateListener {
@@ -141,7 +141,7 @@ abstract class BillingHelper(private val activity: Activity) {
             return true
         }
 
-        dpProvider.getDebugProductIDList().forEach { id ->
+        dpProvider.getProductIdsList().forEach { id ->
             dpProvider.getProductDetailsList().forEach { productDetails ->
                 if (id != productDetails.productId) {
                     setBillingState(BillingState.CONSOLE_PRODUCTS_NOT_FOUND)

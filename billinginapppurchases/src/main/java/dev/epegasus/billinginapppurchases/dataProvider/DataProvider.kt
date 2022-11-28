@@ -15,8 +15,12 @@ class DataProvider {
      * @param productIdsList:   List of product Id's providing by the developer to check/retrieve-details if these products are existing in Google Play Console
      */
 
-    fun setProductList(productIdsList: List<String>) {
+    fun setProductIdsList(productIdsList: List<String>) {
         this.productIdsList = productIdsList
+    }
+
+    fun getProductIdsList() : List<String>{
+        return productIdsList
     }
 
     fun getProductList(): List<QueryProductDetailsParams.Product> {
