@@ -31,3 +31,6 @@
            5)  Launch billing flow (bottomSheet)
            6)  Get Response, save it in SharedPreference or else
  
+
+![Screenshot](https://user-images.githubusercontent.com/100923337/204470993-5f0841e9-02a1-416e-a686-ac32be63a53b.jpg)
+
