@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Suppress("unused")
-abstract class BillingHelper(private val activity: Activity) {
+internal abstract class BillingHelper(private val activity: Activity) {
 
     private val dpProvider by lazy { DataProvider() }
     private var callback: ((isPurchased: Boolean, message: String) -> Unit)? = null
@@ -174,7 +174,12 @@ abstract class BillingHelper(private val activity: Activity) {
             BillingClient.BillingResponseCode.DEVELOPER_ERROR -> {}
             BillingClient.BillingResponseCode.ERROR -> setBillingState(BillingState.PURCHASING_ERROR)
             BillingClient.BillingResponseCode.FEATURE_NOT_SUPPORTED -> {}
-            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> setBillingState(BillingState.PURCHASING_ALREADY_OWNED)
+            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> {
+                setBillingState(BillingState.PURCHASING_ALREADY_OWNED)
+                callback?.invoke(true, BillingState.PURCHASING_ALREADY_OWNED.message)
+                return@PurchasesUpdatedListener
+            }
+
             BillingClient.BillingResponseCode.ITEM_NOT_OWNED -> {}
             BillingClient.BillingResponseCode.ITEM_UNAVAILABLE -> {}
             BillingClient.BillingResponseCode.SERVICE_DISCONNECTED -> {}

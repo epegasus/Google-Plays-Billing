@@ -4,7 +4,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.QueryProductDetailsParams
 
-class DataProvider {
+internal class DataProvider {
 
     private lateinit var productIdsList: List<String>
     private lateinit var productDetailsList: List<ProductDetails>
@@ -19,7 +19,7 @@ class DataProvider {
         this.productIdsList = productIdsList
     }
 
-    fun getProductIdsList() : List<String>{
+    fun getProductIdsList(): List<String> {
         return productIdsList
     }
 
