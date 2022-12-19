@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Suppress("unused")
-internal abstract class BillingHelper(private val activity: Activity) {
+abstract class BillingHelper(private val activity: Activity) {
 
     private val dpProvider by lazy { DataProvider() }
     private var callback: ((isPurchased: Boolean, message: String) -> Unit)? = null
