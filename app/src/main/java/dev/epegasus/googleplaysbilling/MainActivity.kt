@@ -32,14 +32,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBilling() {
         if (BuildConfig.DEBUG) {
-            billingManager.startConnection(billingManager.getDebugProductIDList()) { connectionResult, message ->
+            billingManager.startConnection(billingManager.getDebugProductIDList()) { connectionResult, alreadyPurchased, message ->
                 binding.mbMakePurchase.isEnabled = connectionResult
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                if (alreadyPurchased) {
+                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                }
             }
         } else {
-            billingManager.startConnection(listOf(packageName)) { connectionResult, message ->
+            billingManager.startConnection(listOf(packageName)) { connectionResult, alreadyPurchased, message ->
                 binding.mbMakePurchase.isEnabled = connectionResult
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                if (alreadyPurchased) {
+                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

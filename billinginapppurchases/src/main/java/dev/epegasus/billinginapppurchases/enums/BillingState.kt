@@ -2,12 +2,16 @@ package dev.epegasus.billinginapppurchases.enums
 
 enum class BillingState(val message: String) {
     NONE("Not Stated"),
+    NO_INTERNET_CONNECTION("No Internet Connection"),
     EMPTY_PRODUCT_ID_LIST("Product Ids list cannot be empty"),
     CONNECTION_ESTABLISHING("Connecting to Google Play Console"),
     CONNECTION_DISCONNECTED("Connection disconnected to Google Play Console"),
     CONNECTION_ESTABLISHED("Connection has been established to Google Play Console"),
     CONNECTION_FAILED("Failed to connect Google Play Console"),
     FEATURE_NOT_SUPPORTED("Feature is not Supported! Cannot buy Subscription"),
+    CONSOLE_OLD_PRODUCTS_FETCHING("Fetching old products from google play console."),
+    CONSOLE_OLD_PRODUCTS_NOT_FOUND("User hasn't owned any product yet."),
+    CONSOLE_OLD_PRODUCTS_OWNED("Already owned requested products"),
     CONSOLE_PRODUCTS_FETCHING("Fetching all products from google play console. Try again in few moments"),
     CONSOLE_PRODUCTS_FETCHED_SUCCESSFULLY("Successfully fetched queried products details"),
     CONSOLE_PRODUCTS_FETCHING_FAILED("Failed to fetch products, response is not okay!"),
