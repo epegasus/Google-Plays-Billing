@@ -25,6 +25,7 @@ object State {
             BillingState.NO_INTERNET_CONNECTION -> BillingState.NO_INTERNET_CONNECTION.message
             BillingState.EMPTY_PRODUCT_ID_LIST -> BillingState.EMPTY_PRODUCT_ID_LIST.message
             BillingState.CONNECTION_ESTABLISHING -> BillingState.CONNECTION_ESTABLISHING.message
+            BillingState.CONNECTION_ALREADY_ESTABLISHING -> BillingState.CONNECTION_ALREADY_ESTABLISHING.message
             BillingState.CONNECTION_DISCONNECTED -> BillingState.CONNECTION_DISCONNECTED.message
             BillingState.CONNECTION_ESTABLISHED -> BillingState.CONNECTION_ESTABLISHED.message
             BillingState.CONNECTION_FAILED -> BillingState.CONNECTION_FAILED.message

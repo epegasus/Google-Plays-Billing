@@ -64,6 +64,12 @@ abstract class BillingHelper(private val activity: Activity) {
         dpProvider.setProductIdsList(productIdsList)
 
         setBillingState(BillingState.CONNECTION_ESTABLISHING)
+
+        if (billingClient.isReady){
+            setBillingState(BillingState.CONNECTION_ALREADY_ESTABLISHING)
+            return
+        }
+
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingServiceDisconnected() {
                 setBillingState(BillingState.CONNECTION_DISCONNECTED)

@@ -5,6 +5,7 @@ enum class BillingState(val message: String) {
     NO_INTERNET_CONNECTION("No Internet Connection"),
     EMPTY_PRODUCT_ID_LIST("Product Ids list cannot be empty"),
     CONNECTION_ESTABLISHING("Connecting to Google Play Console"),
+    CONNECTION_ALREADY_ESTABLISHING("Already connected to Google Play Console"),
     CONNECTION_DISCONNECTED("Connection disconnected to Google Play Console"),
     CONNECTION_ESTABLISHED("Connection has been established to Google Play Console"),
     CONNECTION_FAILED("Failed to connect Google Play Console"),
