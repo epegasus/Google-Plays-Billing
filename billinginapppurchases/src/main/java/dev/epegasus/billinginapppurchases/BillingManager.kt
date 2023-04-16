@@ -1,17 +1,25 @@
 package dev.epegasus.billinginapppurchases
 
 import android.app.Activity
+import dev.epegasus.billinginapppurchases.enums.SubscriptionTags
 import dev.epegasus.billinginapppurchases.helper.BillingHelper
+import dev.epegasus.billinginapppurchases.interfaces.OnConnectionListener
+import dev.epegasus.billinginapppurchases.interfaces.OnPurchaseListener
 
 /**
  * @param activity: Must be a reference of an Activity
  */
 class BillingManager(private val activity: Activity) : BillingHelper(activity) {
 
-    override fun startConnection(productIdsList: List<String>, callback: (connectionResult: Boolean, alreadyPurchased: Boolean, message: String) -> Unit) = startBillingConnection(productIdsList, callback)
+    override fun setCheckForSubscription(isCheckRequired: Boolean) {
+        checkForSubscription = isCheckRequired
+    }
 
-    fun makePurchase(callback: (isPurchased: Boolean, message: String) -> Unit) = purchase(callback)
+    override fun startConnection(productIdsList: List<String>, onConnectionListener: OnConnectionListener) = startBillingConnection(productIdsList, onConnectionListener)
 
+    fun makeInAppPurchase(onPurchaseListener: OnPurchaseListener) = purchaseInApp(onPurchaseListener)
+
+    fun makeSubPurchase(subscriptionTags: SubscriptionTags, onPurchaseListener: OnPurchaseListener) = purchaseSub(subscriptionTags, onPurchaseListener)
 }
 
 

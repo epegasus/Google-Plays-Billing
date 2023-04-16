@@ -4,7 +4,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.QueryProductDetailsParams
 
-internal class DataProvider {
+internal class DataProviderInApp {
 
     private lateinit var productIdsList: List<String>
     private lateinit var productDetailsList: List<ProductDetails>
