@@ -6,12 +6,12 @@ import com.android.billingclient.api.QueryProductDetailsParams
 
 internal class DataProviderSub {
 
-    private lateinit var productDetailsList: List<ProductDetails>
+    private var productDetailsList: List<ProductDetails> = listOf()
 
     /* ------------------------------------------------------ Product ID ------------------------------------------------------ */
 
     /**
-     * @param productIdsList:   List of product Id's providing by the developer to check/retrieve-details if these products are existing in Google Play Console
+     * @field productIdsList:   List of product Id's providing by the developer to check/retrieve-details if these products are existing in Google Play Console
      */
 
     val productIdsList = listOf(
@@ -26,17 +26,6 @@ internal class DataProviderSub {
         }
         return arrayList.toList()
     }
-
-    fun getDebugProductIDList(): List<String> = listOf(
-        "android.test.purchased"
-    )
-
-    fun getDebugProductIDsList(): List<String> = listOf(
-        "android.test.item_unavailable",
-        "android.test.refunded",
-        "android.test.canceled",
-        "android.test.purchased"
-    )
 
     /* ---------------------------------------------------- Product Details ---------------------------------------------------- */
 

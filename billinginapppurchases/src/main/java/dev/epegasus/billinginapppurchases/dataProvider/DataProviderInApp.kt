@@ -6,8 +6,8 @@ import com.android.billingclient.api.QueryProductDetailsParams
 
 internal class DataProviderInApp {
 
-    private lateinit var productIdsList: List<String>
-    private lateinit var productDetailsList: List<ProductDetails>
+    private var productIdsList: List<String> = listOf()
+    private var productDetailsList: List<ProductDetails> = listOf()
 
     /* ------------------------------------------------------ Product ID ------------------------------------------------------ */
 
@@ -32,7 +32,7 @@ internal class DataProviderInApp {
     }
 
     fun getDebugProductIDList(): List<String> = listOf(
-        "android.test.purchased"
+        "android.test.item_unavailable"
     )
 
     fun getDebugProductIDsList(): List<String> = listOf(

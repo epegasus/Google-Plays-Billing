@@ -42,7 +42,7 @@ abstract class BillingHelper(private val activity: Activity) {
     private var onPurchaseListener: OnPurchaseListener? = null
 
     private var isPurchasedFound = false
-    protected var checkForSubscription = false
+    @JvmField protected var checkForSubscription = false
 
     /* ------------------------------------------------ Initializations ------------------------------------------------ */
 
@@ -94,7 +94,7 @@ abstract class BillingHelper(private val activity: Activity) {
                     setBillingState(BillingState.CONNECTION_ESTABLISHED)
                     getInAppOldPurchases()
                     Handler(Looper.getMainLooper()).post {
-                        onConnectionListener.onConnectionResult(false, BillingState.CONNECTION_ESTABLISHED.message)
+                        onConnectionListener.onConnectionResult(true, BillingState.CONNECTION_ESTABLISHED.message)
                     }
                 } else {
                     setBillingState(BillingState.CONNECTION_FAILED)
@@ -256,7 +256,6 @@ abstract class BillingHelper(private val activity: Activity) {
 
     /* --------------------------------------------------- Make Purchase  --------------------------------------------------- */
 
-
     protected fun purchaseInApp(onPurchaseListener: OnPurchaseListener) {
         this.onPurchaseListener = onPurchaseListener
         if (checkValidationsInApp()) return
@@ -326,6 +325,7 @@ abstract class BillingHelper(private val activity: Activity) {
         if (checkValidationsSub()) return
 
         this.onPurchaseListener = onPurchaseListener
+
         val productDetails = dataProviderSub.getProductDetailsList()[0]
 
         // Retrieve all offers the user is eligible for.
@@ -378,8 +378,14 @@ abstract class BillingHelper(private val activity: Activity) {
             return true
         }
 
-        dataProviderInApp.getProductIdsList().forEach { id ->
-            dataProviderInApp.getProductDetailsList().forEach { productDetails ->
+        if (dataProviderSub.getProductDetailsList().isEmpty()) {
+            setBillingState(BillingState.CONSOLE_PRODUCTS_SUB_NOT_FOUND)
+            onPurchaseListener?.onPurchaseResult(false, BillingState.CONSOLE_PRODUCTS_SUB_NOT_FOUND.message)
+            return true
+        }
+
+        dataProviderSub.productIdsList.forEach { id ->
+            dataProviderSub.getProductDetailsList().forEach { productDetails ->
                 if (id != productDetails.productId) {
                     setBillingState(BillingState.CONSOLE_PRODUCTS_SUB_NOT_FOUND)
                     onPurchaseListener?.onPurchaseResult(false, BillingState.CONSOLE_PRODUCTS_SUB_NOT_FOUND.message)
@@ -514,13 +520,17 @@ abstract class BillingHelper(private val activity: Activity) {
 
     private val isInternetConnected: Boolean
         get() {
-            val network = connectivityManager.activeNetwork ?: return false
-            val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-            return when {
-                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> false
+            try {
+                val network = connectivityManager.activeNetwork ?: return false
+                val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+                return when {
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            } catch (ex: Exception) {
+                return false
             }
         }
 

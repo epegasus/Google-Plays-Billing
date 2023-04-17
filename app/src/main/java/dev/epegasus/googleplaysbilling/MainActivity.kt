@@ -5,7 +5,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.epegasus.billinginapppurchases.BillingManager
-import dev.epegasus.billinginapppurchases.enums.SubscriptionTags
 import dev.epegasus.billinginapppurchases.interfaces.OnConnectionListener
 import dev.epegasus.billinginapppurchases.interfaces.OnPurchaseListener
 import dev.epegasus.billinginapppurchases.status.State
@@ -70,11 +69,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        billingManager.makeSubPurchase(SubscriptionTags.basicMonthly, object : OnPurchaseListener {
+        /*billingManager.makeSubPurchase(SubscriptionTags.basicMonthly, object : OnPurchaseListener {
             override fun onPurchaseResult(isPurchaseSuccess: Boolean, message: String) {
                 Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 binding.mbMakePurchase.isEnabled = !isPurchaseSuccess
             }
-        })
+        })*/
     }
 }
